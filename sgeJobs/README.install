@@ -1,0 +1,19 @@
+Para instalar o sistema em uma nova maquina siga os seguintes passos:
+
+1) Execute o script sgeJobs.sql para criar o banco de dados no servidor postgres
+psql -f sgeJobs.sql
+
+2) Habilite o servidor postgres para aceitar conexoes TCP/IP com password para o banco de dados sgejobs
+
+3) Coloque a senha do usuario sgejobs no arquivo ~/.pgpass do usuario que ira executar o script loadSgeJobs.sh
+A linha de autorizacao no arquivo .pgpass devera atender a sintaxe:
+host:port:database:user:password
+Exemplo:
+localhost:5432:sgejobs:sgejobs:sgeJobs#123
+
+4) Copie o diretorio sgeJobs para o diretorio /root/scripts na maquina que ira efetuar a carga dos dados
+
+5) Faca um link simbolico do arquivo /root/scripts/sgeJobs/cron_loadSgeJobs.sh no diretorio /etc/cron.daily
+
+cd /etc/cron.daily
+ln -s /root/scripts/sgeJobs/cron_loadSgeJobs.sh cron_loadSgeJobs.sh
